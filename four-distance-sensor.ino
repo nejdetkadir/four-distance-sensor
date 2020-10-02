@@ -27,28 +27,28 @@ void loop() {
   int arr[] = {calculateDistance(first_echo, first_trig), calculateDistance(second_echo, second_trig), calculateDistance(third_echo, third_trig), calculateDistance(fourth_echo, fourth_trig)};
   String order[] = {"first", "second", "third", "fourth"};
   int max_distance = arr[0];
-  int max_order = 1;
+  int max_order = 0;
   for(int i=0; i<4; i++) {
     if (max_distance < arr[i]) {
       max_distance = arr[i];
-      max_order = i+1;
+      max_order = i;
     }
   }
 
-  Serial.print("en uzak ölçüm yapan cihaz ");
-  Serial.print(max_order);
+  Serial.print("The most distant sensor : ");
+  Serial.print(order[max_order]);
   Serial.print("\n");
 }
 
 int calculateDistance(int echo, int trigger) {
-  int sure, mesafe;
+  int timee, distance;
 
   digitalWrite(trigger, HIGH);
   delayMicroseconds(1000);
   digitalWrite(trigger, LOW);
 
-  sure = pulseIn(echo, HIGH);
-  mesafe = (sure/2) / 29.1;
+  timee = pulseIn(echo, HIGH);
+  distance = (timee/2) / 29.1;
   
-  return mesafe;  
+  return distance;  
 }
